@@ -1,0 +1,24 @@
+---
+
+- name: ensure locale is en_US.UTF-8
+  locale_gen: name=en_US.UTF-8
+              state=present
+
+- name: ensure timezone is Shanghai
+  file: src=/usr/share/zoneinfo/Asia/Shanghai
+        dest=/etc/localtime
+        state=link
+        force=yes
+
+- name: ensure user turtle exsits and has sudo privilege
+  user: name=turtle
+        group=users
+        groups=sudo
+        state=present
+        shell=/bin/bash
+        createhome=yes
+        non_unique=yes
+
+- name: setup ssh pubkey for turtle
+  authorized_key: user=turtle
+                  key="{{ lookup('file', '~/.ssh/digitalocean_rsa.pub') }}"

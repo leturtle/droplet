@@ -1,0 +1,16 @@
+---
+- hosts: all
+  remote_user: root
+  roles:
+    - common
+
+# - hosts: all
+#   remote_user: turtle
+#   sudo: yes
+#   roles:
+#     - vpn
+#
+# - hosts: all
+#   remote_user: turtle
+#   roles:
+#     - rc
